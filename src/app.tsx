@@ -1,6 +1,6 @@
 import React from "react";
-
+import { AppRouter } from "@/core";
 
 export const App = () => {
-  return <><h1>hellooo</h1></>
+  return <AppRouter />;
 };

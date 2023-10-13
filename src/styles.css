@@ -1,0 +1,22 @@
+.character-list-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 10fr;
+  grid-template-rows: 20px;
+  grid-auto-rows: 80px;
+  grid-gap: 10px 5px;
+}
+
+input{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.header {
+  background-color: rgb(192, 73, 73);
+  color: white;
+  font-weight: bold;
+}
+
+.character-list-container > img {
+  width: 80px;
+}
