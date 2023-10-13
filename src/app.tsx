@@ -1,6 +1,10 @@
 import React from "react";
-import { AppRouter } from "@/core";
+import { AppRouter, FilterContextProvider } from "@/core";
 
 export const App = () => {
-  return <AppRouter />;
+  return (
+    <FilterContextProvider>
+      <AppRouter />
+    </FilterContextProvider>
+  )
 };

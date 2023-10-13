@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { CharacterEntity } from './list.vm';
-import { useDebounce } from 'use-debounce';
-import { routes } from '@/core';
+import { routes, FilterContext } from '@/core';
+
 export const List: React.FC = () => {
+  const { characterName, setCharacterName } = React.useContext(FilterContext);
+
   const [characters, setCharacters] = useState<CharacterEntity[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [debouncedSearchQuery] = useDebounce(searchQuery, 1000); // 300ms debounce delay
+  const [, setSearchQuery] = useState<string>('');
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
       .then(response => response.json())
       .then(data => setCharacters(data.results));
   }, []);
   const filteredCharacters = characters.filter(character =>
-    character.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
+    character.name.toLowerCase().includes(characterName.toLowerCase())
   );
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+    setCharacterName(event.target.value)
   };
   return (
     <>
       <input
         type="text"
         placeholder="Search by name"
-        value={searchQuery}
+        value={characterName}
         onChange={handleSearchChange}
       />
       <div className="character-list-container">

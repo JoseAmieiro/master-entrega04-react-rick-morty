@@ -15,10 +15,10 @@ export const FilterContext = React.createContext<FilterContext>({
 });
 
 export const FilterContextProvider: React.FC <Props> = (props) => {
-    const [organizationName, setOrganizationName] = React.useState("lemoncode");
+    const [characterName, setCharacterName] = React.useState("");
 
     return (
-        <FilterContext.Provider value={{ characterName: organizationName, setCharacterName: setOrganizationName }}>
+        <FilterContext.Provider value={{ characterName, setCharacterName }}>
             {props.children}
         </FilterContext.Provider>
     );
