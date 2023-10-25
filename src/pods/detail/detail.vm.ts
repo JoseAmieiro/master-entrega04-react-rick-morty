@@ -1,5 +1,5 @@
 export interface CharacterEntityVM {
-    id: string;
+    id: number;
     name: string;
     status: string;
     type: string;
@@ -8,7 +8,7 @@ export interface CharacterEntityVM {
   }
   
   export const createDefaultMemberDetail = (): CharacterEntityVM => ({
-    id: "",
+    id: 0,
     name: "",
     status:"",
     type: "",

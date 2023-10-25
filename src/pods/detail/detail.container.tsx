@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { getMember } from "./api/api";
 
+import { getCharacter } from "./api/api";
 import { Detail } from "./detail.component";
 import { mapMemberToVM } from "./detail.mappers";
 import { createDefaultMemberDetail, CharacterEntityVM } from "./detail.vm";
@@ -14,7 +14,7 @@ export const DetailContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
   React.useEffect(() => {
-    getMember(id).then(mapMemberToVM).then(setMember)
+    getCharacter(id).then(mapMemberToVM).then(setMember)
   }, [])
 
 

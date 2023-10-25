@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { CharacterEntity } from './list.vm';
 import { routes, FilterContext } from '@/core';
+import { ListHeader } from './components';
 
 export const List: React.FC = () => {
   const { characterName, setCharacterName } = React.useContext(FilterContext);
-
-  const [characters, setCharacters] = useState<CharacterEntity[]>([]);
-  const [, setSearchQuery] = useState<string>('');
-  useEffect(() => {
+  const [characters, setCharacters] = React.useState<CharacterEntity[]>([]);
+  const [, setSearchQuery] = React.useState<string>('');
+  
+  React.useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
       .then(response => response.json())
       .then(data => setCharacters(data.results));
   }, []);
+
   const filteredCharacters = characters.filter(character =>
     character.name.toLowerCase().includes(characterName.toLowerCase())
   );
@@ -30,19 +32,14 @@ export const List: React.FC = () => {
         onChange={handleSearchChange}
       />
       <div className="character-list-container">
-        <span className="header">Avatar</span>
-        <span className="header">Id</span>
-        <span className="header">Name</span>
-        {filteredCharacters.map(item => {
-          console.log(item.name.toString())
-          return (
+      <ListHeader />
+        {filteredCharacters.map(item => 
             <React.Fragment key={item.id}>
               <img src={item.image} alt="avatar" />
               <div>{item.id}</div>
               <Link to={routes.detail(item.id.toString())}>{item.name}</Link>
             </React.Fragment>
-          );
-        })}
+        )}
       </div>
     </>
   );
